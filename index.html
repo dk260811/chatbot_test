@@ -47,7 +47,7 @@
                     // Wait for the chat window to fully load
                     setTimeout(() => {
                         // Find the "Start New Chat" button using XPath and simulate a click
-                        const xpath = '//*[@id="voiceflow-chat"]//div/div[2]/div/article/footer/button';
+                        const xpath = '/html/body/div//div/div[2]/div/article/footer/button';
                         const result = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
                         const startNewChatButton = result.singleNodeValue;
 
