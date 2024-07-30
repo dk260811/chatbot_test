@@ -47,17 +47,16 @@
                     // Wait for the chat window to fully load
                     setTimeout(() => {
                         // Find the "Start New Chat" button and simulate a click
-                        const startNewChatButton = document.querySelector('footer.vfrc-footer button.vfrc-button--primary');
+                        const startNewChatButton = document.querySelector('button.c-dzcdPv.vfrc-button.c-jjMiVY.vfrc-button--primary');
                         if (startNewChatButton) {
                             startNewChatButton.click();
                         } else {
                             console.error("Start New Chat button not found.");
                         }
-                    }, 5000); // Increase the timeout duration to 5000 ms (5 seconds)
+                    }, 3000); // Timeout duration of 3000 ms (3 seconds)
                 });
             });
         });
     </script>
 </body>
 </html>
-
