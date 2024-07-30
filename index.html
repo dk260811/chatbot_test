@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Page</title>
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
         .icon {
-            position: absolute;
+            position: fixed; /* Fixed position to ensure it stays in place even when scrolling */
             top: 10px;
             right: 10px;
             width: 50px;
