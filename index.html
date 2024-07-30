@@ -44,13 +44,14 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('activate-chatbot').addEventListener('click', function() {
                 window.voiceflow.chat.open().then(() => {
-                    window.voiceflow.chat.interact({
-                        type: "block",
-                        payload: {
-                            intent: { name: "English Block" },
-                            entities: []
+                    // Wait for the chat window to fully load
+                    setTimeout(() => {
+                        // Find the "Start New Chat" button and simulate a click
+                        const startNewChatButton = document.querySelector('footer.vfrc-footer button.vfrc-button--primary');
+                        if (startNewChatButton) {
+                            startNewChatButton.click();
                         }
-                    });
+                    }, 2000); // Adjust the timeout as needed to ensure the chat window is fully loaded
                 });
             });
         });
