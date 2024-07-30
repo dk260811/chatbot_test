@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Page</title>
+    <title>Custom Chatbot Activation</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            position: relative;
         }
         .flag-icon {
             position: fixed;
@@ -19,11 +18,14 @@
             cursor: pointer;
             z-index: 1000; /* Ensure it stays above other elements */
         }
-        .chatbot-icon {
-            display: none; /* Hide chatbot icon as it is not needed for display */
-        }
     </style>
+</head>
+<body>
+    <h1>Test Page</h1>
+    <img src="https://image.similarpng.com/very-thumbnail/2020/06/United-Kingdom-flag-icon-on-transparent-background-PNG.png" alt="UK Flag" class="flag-icon" id="activate-chatbot">
+
     <script type="text/javascript">
+        // Load the Web Chat widget
         (function(d, t) {
             var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
             v.onload = function() {
@@ -38,21 +40,20 @@
             s.parentNode.insertBefore(v, s);
         })(document, 'script');
 
-        function openChatbot() {
-            // Assuming the chatbot widget is accessible via window.voiceflow.chat.open()
-            if (window.voiceflow && window.voiceflow.chat) {
-                window.voiceflow.chat.open();
-            }
-        }
-
+        // Add click event listener to activate the chatbot
         document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById('flag-icon').addEventListener('click', openChatbot);
+            document.getElementById('activate-chatbot').addEventListener('click', function() {
+                window.voiceflow.chat.open().then(() => {
+                    window.voiceflow.chat.interact({
+                        type: "block",
+                        payload: {
+                            intent: { name: "English Block" },
+                            entities: []
+                        }
+                    });
+                });
+            });
         });
     </script>
-</head>
-<body>
-    <h1>Test Page</h1>
-    <img src="https://image.similarpng.com/very-thumbnail/2020/06/United-Kingdom-flag-icon-on-transparent-background-PNG.png" alt="UK Flag" class="flag-icon" id="flag-icon">
-    <!-- This chatbot icon will be automatically rendered by Voiceflow and always visible -->
 </body>
 </html>
