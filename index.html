@@ -4,23 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Page</title>
-
-    <script type="text/javascript">
-      (function(d, t) {
-          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-          v.onload = function() {
-            window.voiceflow.chat.load({
-              verify: { projectID: '66a0c7c261762753caa83435' },
-              url: 'https://general-runtime.voiceflow.com',
-              versionID: 'production'
-            });
-          }
-          v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-      })(document, 'script');
-    </script>
-            
+    <style>
+        .icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>Test Page</h1>
+    <img src="https://image.similarpng.com/very-thumbnail/2020/06/United-Kingdom-flag-icon-on-transparent-background-PNG.png" alt="UK Flag" class="icon" id="chatbot-icon">
+    
+    <script type="text/javascript">
+        document.getElementById('chatbot-icon').addEventListener('click', function() {
+            (function(d, t) {
+                var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                v.onload = function() {
+                    window.voiceflow.chat.load({
+                        verify: { projectID: '66a0c7c261762753caa83435' },
+                        url: 'https://general-runtime.voiceflow.com',
+                        versionID: 'production'
+                    });
+                }
+                v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+                v.type = "text/javascript"; 
+                s.parentNode.insertBefore(v, s);
+            })(document, 'script');
+        });
+    </script>
 </body>
 </html>
