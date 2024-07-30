@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activate Chatbot Example</title>
+    <title>Custom Chatbot Activation</title>
     <style>
-        #activate-chatbot {
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .flag-icon {
             position: fixed;
             top: 10px;
             right: 10px;
             width: 50px;
             height: 50px;
             cursor: pointer;
-            z-index: 1000;
+            z-index: 1000; /* Ensure it stays above other elements */
         }
     </style>
 </head>
 <body>
     <h1>Test Page</h1>
-    <!-- Flag icon to activate the chatbot -->
-    <img src="https://image.similarpng.com/very-thumbnail/2020/06/United-Kingdom-flag-icon-on-transparent-background-PNG.png" 
-         alt="Activate Chatbot" 
-         id="activate-chatbot">
+    <img src="https://image.similarpng.com/very-thumbnail/2020/06/United-Kingdom-flag-icon-on-transparent-background-PNG.png" alt="UK Flag" class="flag-icon" id="activate-chatbot">
 
     <script type="text/javascript">
         // Load the Web Chat widget
@@ -43,15 +44,19 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('activate-chatbot').addEventListener('click', function() {
                 window.voiceflow.chat.open().then(() => {
-                    // Delay the interaction to ensure the chat window is fully open
+                    // Wait for the chat window to fully load
                     setTimeout(() => {
-                        window.voiceflow.chat.interact({
-                            type: "block",
-                            payload: {
-                                intent: { name: "english block" } // Replace with the actual intent name or block ID
-                            }
-                        });
-                    }, 1000); // Adjust the delay as necessary
+                        // Find the "Start New Chat" button using XPath and simulate a click
+                        const xpath = '//*[@id="voiceflow-chat"]//div/div[2]/div/article/footer/button';
+                        const result = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+                        const startNewChatButton = result.singleNodeValue;
+
+                        if (startNewChatButton) {
+                            startNewChatButton.click();
+                        } else {
+                            console.error("Start New Chat button not found.");
+                        }
+                    }, 3000); // Timeout duration of 3000 ms (3 seconds)
                 });
             });
         });
