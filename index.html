@@ -40,23 +40,34 @@
             s.parentNode.insertBefore(v, s);
         })(document, 'script');
 
+        // Function to simulate click on the "Start New Chat" button
+        function clickStartNewChatButton() {
+            // Use querySelector to find the button
+            const startNewChatButton = document.querySelector('footer button');
+
+            if (startNewChatButton) {
+                startNewChatButton.click();
+            } else {
+                console.error("Start New Chat button not found.");
+            }
+        }
+
         // Add click event listener to activate the chatbot
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('activate-chatbot').addEventListener('click', function() {
                 window.voiceflow.chat.open().then(() => {
-                    // Wait for the chat window to fully load
-                    setTimeout(() => {
-                        // Find the "Start New Chat" button using XPath and simulate a click
-                        const xpath = '/html/body/div//div/div[2]/div/article/footer/button';
-                        const result = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
-                        const startNewChatButton = result.singleNodeValue;
+                    // Observe changes to the chat window to ensure the button is loaded
+                    const observer = new MutationObserver((mutations) => {
+                        mutations.forEach((mutation) => {
+                            if (mutation.addedNodes.length) {
+                                clickStartNewChatButton();
+                                observer.disconnect(); // Stop observing once the button is clicked
+                            }
+                        });
+                    });
 
-                        if (startNewChatButton) {
-                            startNewChatButton.click();
-                        } else {
-                            console.error("Start New Chat button not found.");
-                        }
-                    }, 3000); // Timeout duration of 3000 ms (3 seconds)
+                    // Observe the chat widget container for added nodes
+                    observer.observe(document.body, { childList: true, subtree: true });
                 });
             });
         });
