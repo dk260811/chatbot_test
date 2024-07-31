@@ -3,74 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Chatbot Activation</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        .flag-icon {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            z-index: 1000; /* Ensure it stays above other elements */
-        }
-    </style>
+    <title>Test Bot</title>
 </head>
 <body>
-    <h1>Test Page</h1>
-    <img src="https://image.similarpng.com/very-thumbnail/2020/06/United-Kingdom-flag-icon-on-transparent-background-PNG.png" alt="UK Flag" class="flag-icon" id="activate-chatbot">
-
+    <h1>Welcome to Test Bot</h1>
     <script type="text/javascript">
-        // Load the Web Chat widget
-        (function(d, t) {
-            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-            v.onload = function() {
-                window.voiceflow.chat.load({
-                    verify: { projectID: '66a0c7c261762753caa83435' },
-                    url: 'https://general-runtime.voiceflow.com',
-                    versionID: 'production'
-                });
-            }
-            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
-            v.type = "text/javascript"; 
-            s.parentNode.insertBefore(v, s);
-        })(document, 'script');
-
-        // Function to simulate click on the "Start New Chat" button
-        function clickStartNewChatButton() {
-            // Use querySelector to find the button
-            const startNewChatButton = document.querySelector('footer button');
-
-            if (startNewChatButton) {
-                startNewChatButton.click();
-            } else {
-                console.error("Start New Chat button not found.");
-            }
-        }
-
-        // Add click event listener to activate the chatbot
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById('activate-chatbot').addEventListener('click', function() {
-                window.voiceflow.chat.open().then(() => {
-                    // Observe changes to the chat window to ensure the button is loaded
-                    const observer = new MutationObserver((mutations) => {
-                        mutations.forEach((mutation) => {
-                            if (mutation.addedNodes.length) {
-                                clickStartNewChatButton();
-                                observer.disconnect(); // Stop observing once the button is clicked
-                            }
-                        });
-                    });
-
-                    // Observe the chat widget container for added nodes
-                    observer.observe(document.body, { childList: true, subtree: true });
-                });
+      (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectID: '66a0c7c261762753caa83435' },
+              url: 'https://general-runtime.voiceflow.com',
+              versionID: 'production'
             });
-        });
+          }
+          v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+      })(document, 'script');
     </script>
 </body>
 </html>
